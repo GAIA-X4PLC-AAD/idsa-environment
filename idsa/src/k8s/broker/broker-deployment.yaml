@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: idsa-broker-core
+  labels:
+    app: broker-core-app
+  namespace: gxfs-idsa
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: broker-core-app
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: broker-core-app
+    spec:
+      tolerations:
+        - key: "kubernetes.azure.com/scalesetpriority"
+          operator: "Equal"
+          value: "spot"
+          effect: "NoSchedule"
+      containers:
+        - name: broker-core
+          image: idstestbed/broker-core:4.2.8
+          envFrom:
+            - configMapRef:
+                name: broker-core-config
+          ports:
+            - containerPort: 8080
+      restartPolicy: Always
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: idsa-broker-fuseki
+  labels:
+    app: broker-fuseki-app
+  namespace: gxfs-idsa
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: broker-fuseki-app
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: broker-fuseki-app
+    spec:
+      tolerations:
+        - key: "kubernetes.azure.com/scalesetpriority"
+          operator: "Equal"
+          value: "spot"
+          effect: "NoSchedule"
+      containers:
+        - name: broker-fuseki
+          image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/fuseki:latest
+          ports:
+            - containerPort: 3030
+          volumeMounts:
+            - name: broker-fuseki
+              mountPath: /fuseki/configuration/connectorData.ttl
+              subPath: connectorData.ttl
+      volumes:
+        - name: broker-fuseki
+          configMap:
+            name: broker-fuseki-config
+      restartPolicy: Always
