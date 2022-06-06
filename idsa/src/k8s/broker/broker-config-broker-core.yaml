@@ -4,7 +4,7 @@ metadata:
   name: broker-core-config
   namespace: gxfs-idsa
 data:
-  SPARQL_ENDPOINT: "http://broker-fuseki-service:8080/connectorData"
+  SPARQL_ENDPOINT: "http://broker-fuseki-service:3030/connectorData"
   ELASTICSEARCH_HOSTNAME: "broker-elasticsearch"
   SHACL_VALIDATION: "false"
   DAPS_VALIDATE_INCOMING: "false"
