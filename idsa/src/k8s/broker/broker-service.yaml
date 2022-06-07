@@ -36,5 +36,5 @@ spec:
     app: broker-frontend-app
   ports:
     - protocol: TCP
-      port: 8082
+      port: 80
       targetPort: 80

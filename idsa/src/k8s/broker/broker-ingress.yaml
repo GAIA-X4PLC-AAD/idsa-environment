@@ -18,3 +18,10 @@ spec:
                 name: broker-core-service
                 port:
                   number: 8080
+          - path: /idsa-broker-ui(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: broker-frontend-service
+                port:
+                  number: 80
