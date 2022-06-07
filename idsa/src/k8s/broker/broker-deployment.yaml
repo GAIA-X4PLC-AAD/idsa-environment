@@ -66,10 +66,15 @@ spec:
             - name: broker-fuseki
               mountPath: /fuseki/configuration/connectorData.ttl
               subPath: connectorData.ttl
+            - name: broker-fuseki-persistent-storage
+              mountPath: /var/tmp
       volumes:
         - name: broker-fuseki
           configMap:
             name: broker-fuseki-config
+        - name: broker-fuseki-persistent-storage
+          persistentVolumeClaim:
+            claimName: broker-fuseki-pvc
       restartPolicy: Always
 
 ---
