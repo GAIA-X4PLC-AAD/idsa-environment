@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: omejdn-config
+  namespace: gxfs-idsa
+data:
+  OMEJDN_DOMAIN: "omejdn"
+  OMEJDN_PATH: "/auth"
+  UI_PATH: ""
+  nginx.conf: |
+    server {
+      listen              80 default_server;
+      listen              [::]:80 default_server ;
+      server_name         omejdn;
+
+      proxy_set_header   Host $host;
+      proxy_set_header   X-Forwarded-Proto http;
+
+      # Proxy to Omejdn
+      location  /auth {
+        rewrite /auth/(.*) /$1  break;
+        proxy_pass         http://omejdn-server:4567;
+        proxy_redirect     off;
+      }
+
+      # Proxy to the Admin UI
+      location  / {
+        rewrite /(.*) /$1  break;
+        proxy_pass         http://omejdn-ui;
+        proxy_redirect     off;
+      }
+
+      #  Well-Known URIs
+      location /.well-known {
+        # RFC 8414 style metadata document and compatibility backup
+        rewrite /\.well-known/oauth-authorization-server/auth   /auth/.well-known/oauth-authorization-server last;
+        rewrite /\.well-known/openid-configuration/auth         /auth/.well-known/openid-configuration       last;
+        rewrite /\.well-known/jwks.json                         /auth/jwks.json                              last;
+
+        # Webfinger
+        rewrite /\.well-known/webfinger                         /auth/.well-known/webfinger                  last;
+      }
+    }

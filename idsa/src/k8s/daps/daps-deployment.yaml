@@ -1,0 +1,163 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: idsa-omejdn
+  labels:
+    app: omejdn-app
+  namespace: gxfs-idsa
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: omejdn-app
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: omejdn-app
+    spec:
+      tolerations:
+        - key: "kubernetes.azure.com/scalesetpriority"
+          operator: "Equal"
+          value: "spot"
+          effect: "NoSchedule"
+      containers:
+        - name: omejdn
+          image: nginx:1.21.6
+          envFrom:
+            - configMapRef:
+                name: omejdn-config
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - mountPath: /etc/nginx/templates/default.conf.template
+              name: omejdn
+      volumes:
+        - name: omejdn
+          configMap:
+            name: omejdn-config
+      restartPolicy: Always
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: idsa-omejdn-server
+  labels:
+    app: omejdn-server-app
+  namespace: gxfs-idsa
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: omejdn-server-app
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: omejdn-server-app
+    spec:
+      tolerations:
+        - key: "kubernetes.azure.com/scalesetpriority"
+          operator: "Equal"
+          value: "spot"
+          effect: "NoSchedule"
+      containers:
+        - name: omejdn-server
+          image: ghcr.io/fraunhofer-aisec/omejdn-server:1.6.0
+          envFrom:
+            - configMapRef:
+                name: omejdn-server-config
+          volumeMounts:
+            - mountPath: /opt/config/clients.yml
+              name: omejdn-server
+              subPath: clients.yml
+            - mountPath: /opt/config/oauth_providers.yml
+              name: omejdn-server
+              subPath: oauth_providers.yml
+            - mountPath: /opt/config/omejdn.yml
+              name: omejdn-server
+              subPath: omejdn.yml
+            - mountPath: /opt/config/scope_description.yml
+              name: omejdn-server
+              subPath: scope_description.yml
+            - mountPath: /opt/config/scope_mapping.yml
+              name: omejdn-server
+              subPath: scope_mapping.yml
+            - mountPath: /opt/config/users.yml
+              name: omejdn-server
+              subPath: users.yml
+            - mountPath: /opt/config/webfinger.yml
+              name: omejdn-server
+              subPath: webfinger.yml
+            - mountPath: /opt/keys/testbed3.cert
+              name: omejdn-server
+              subPath: testbed3.cert
+            - mountPath: /opt/keys/testbed3.jks
+              name: omejdn-server
+              subPath: testbed3.jks
+            - mountPath: /opt/keys/testbed3.key
+              name: omejdn-server
+              subPath: testbed3.key
+            - mountPath: /opt/keys/testbed3.p12
+              name: omejdn-server
+              subPath: testbed3.p12
+            - mountPath: /opt/keys/testbed1.cert
+              name: omejdn-server
+              subPath: testbed1.cert
+            - mountPath: /opt/keys/testbed1.key
+              name: omejdn-server
+              subPath: testbed1.key
+            - mountPath: /opt/keys/testbed1.p12
+              name: omejdn-server
+              subPath: testbed1.p12
+            - mountPath: /opt/keys/testbed2.cert
+              name: omejdn-server
+              subPath: testbed2.cert
+            - mountPath: /opt/keys/testbed2.key
+              name: omejdn-server
+              subPath: testbed2.key
+            - mountPath: /opt/keys/testbed2.p12
+              name: omejdn-server
+              subPath: testbed2.p12
+      volumes:
+        - name: omejdn-server
+          configMap:
+            name: omejdn-server-config
+      restartPolicy: Always
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: idsa-omejdn-ui
+  labels:
+    app: omejdn-ui-app
+  namespace: gxfs-idsa
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: omejdn-ui-app
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: omejdn-ui-app
+    spec:
+      tolerations:
+        - key: "kubernetes.azure.com/scalesetpriority"
+          operator: "Equal"
+          value: "spot"
+          effect: "NoSchedule"
+      containers:
+        - name: omejdn-ui
+          image: ghcr.io/fraunhofer-aisec/omejdn-ui:dev
+          envFrom:
+            - configMapRef:
+                name: omejdn-ui-config
+      restartPolicy: Always
