@@ -67,7 +67,7 @@ spec:
               mountPath: /fuseki/configuration/connectorData.ttl
               subPath: connectorData.ttl
             - name: broker-fuseki-persistent-storage
-              mountPath: /var/tmp
+              mountPath: /fuseki
       volumes:
         - name: broker-fuseki
           configMap:

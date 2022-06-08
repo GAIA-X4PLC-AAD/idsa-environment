@@ -18,21 +18,6 @@ spec:
                 name: broker-core-service
                 port:
                   number: 8080
-
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: broker-frontend-ingress
-  namespace: gxfs-idsa
-  annotations:
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-spec:
-  ingressClassName: nginx
-  rules:
-    - http:
-        paths:
           - path: /idsa-broker-ui(/|$)(.*)
             pathType: Prefix
             backend:
