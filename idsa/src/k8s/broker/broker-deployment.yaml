@@ -104,7 +104,7 @@ spec:
           effect: "NoSchedule"
       containers:
         - name: broker-frontend
-          image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker/frontend
+          image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker/frontend:5.0.0
           ports:
             - containerPort: 80
       restartPolicy: Always

@@ -65,69 +65,33 @@ spec:
           operator: "Equal"
           value: "spot"
           effect: "NoSchedule"
+      initContainers:
+        - name: omejdn-server-init
+          image: busybox:1.34.1
+          command: ['sh', '-c', 'cp /tmp/config/* /opt/config/']
+          volumeMounts:
+            - mountPath: /tmp/config
+              name: config-files
+            - mountPath: /opt/config
+              name: config-dir
       containers:
         - name: omejdn-server
           image: ghcr.io/fraunhofer-aisec/omejdn-server:1.6.0
           envFrom:
             - configMapRef:
-                name: omejdn-server-config
+                name: omejdn-server-env
           volumeMounts:
-            - mountPath: /opt/config/clients.yml
-              name: omejdn-server
-              subPath: clients.yml
-            - mountPath: /opt/config/oauth_providers.yml
-              name: omejdn-server
-              subPath: oauth_providers.yml
-            - mountPath: /opt/config/omejdn.yml
-              name: omejdn-server
-              subPath: omejdn.yml
-            - mountPath: /opt/config/scope_description.yml
-              name: omejdn-server
-              subPath: scope_description.yml
-            - mountPath: /opt/config/scope_mapping.yml
-              name: omejdn-server
-              subPath: scope_mapping.yml
-            - mountPath: /opt/config/users.yml
-              name: omejdn-server
-              subPath: users.yml
-            - mountPath: /opt/config/webfinger.yml
-              name: omejdn-server
-              subPath: webfinger.yml
-            - mountPath: /opt/keys/testbed3.cert
-              name: omejdn-server
-              subPath: testbed3.cert
-            - mountPath: /opt/keys/testbed3.jks
-              name: omejdn-server
-              subPath: testbed3.jks
-            - mountPath: /opt/keys/testbed3.key
-              name: omejdn-server
-              subPath: testbed3.key
-            - mountPath: /opt/keys/testbed3.p12
-              name: omejdn-server
-              subPath: testbed3.p12
-            - mountPath: /opt/keys/testbed1.cert
-              name: omejdn-server
-              subPath: testbed1.cert
-            - mountPath: /opt/keys/testbed1.key
-              name: omejdn-server
-              subPath: testbed1.key
-            - mountPath: /opt/keys/testbed1.p12
-              name: omejdn-server
-              subPath: testbed1.p12
-            - mountPath: /opt/keys/testbed2.cert
-              name: omejdn-server
-              subPath: testbed2.cert
-            - mountPath: /opt/keys/testbed2.key
-              name: omejdn-server
-              subPath: testbed2.key
-            - mountPath: /opt/keys/testbed2.p12
-              name: omejdn-server
-              subPath: testbed2.p12
+            - mountPath: /opt/keys/
+              name: keys-files
       volumes:
-        - name: omejdn-server
+        - name: config-dir
+          emptyDir: {}
+        - name: config-files
           configMap:
             name: omejdn-server-config
-      restartPolicy: Always
+        - name: keys-files
+          configMap:
+            name: omejdn-server-keys
 
 ---
 apiVersion: apps/v1

@@ -5,7 +5,8 @@ metadata:
   namespace: gxfs-idsa
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
+  storageClassName: manual
   resources:
     requests:
       storage: 1Gi

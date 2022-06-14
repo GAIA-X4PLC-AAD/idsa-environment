@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: omejdn-server-env
+  namespace: gxfs-idsa
+data:
+  OMEJDN_ISSUER: http://omejdn/auth
+  OMEJDN_FRONT_URL: http://omejdn/auth
+  OMEJDN_ENVIRONMENT: development
+  OMEJDN_ACCEPT_AUDIENCE: idsc:IDS_CONNECTORS_ALL
+  OMEJDN_DEFAULT_AUDIENCE: idsc:IDS_CONNECTORS_ALL
