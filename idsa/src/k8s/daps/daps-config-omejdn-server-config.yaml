@@ -80,7 +80,7 @@ data:
     plugins:
     user_db:
       yaml:
-        location: config/users.yml
+        location: config/users-db.yml
     claim_mapper:
       attribute:
         skip_access_token: false
@@ -126,10 +126,10 @@ data:
   users.yml: |
     ---
     - username: admin
-    attributes:
+      attributes:
       - key: omejdn
         value: admin
-    password: "$2a$12$gigRDsS9jyjC/Kzgr1st6eoUb8RVofYXYmrz2ISsGdpddn8quIVwq"
+      password: "$2a$12$gigRDsS9jyjC/Kzgr1st6eoUb8RVofYXYmrz2ISsGdpddn8quIVwq"
   webfinger.yml: |
     ---
     # Define a webfinger here
