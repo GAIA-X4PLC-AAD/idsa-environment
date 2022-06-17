@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: omejdn-server-env
+  name: omejdn-server-env-config
   namespace: gxfs-idsa
 data:
   OMEJDN_ISSUER: http://omejdn/auth

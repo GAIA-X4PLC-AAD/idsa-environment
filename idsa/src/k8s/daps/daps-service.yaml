@@ -1,11 +1,40 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: omejdn-service
+  name: daps-proxy-service
   namespace: gxfs-idsa
 spec:
   selector:
-    app: omejdn-app
+    app: omejdn-proxy-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: daps-server-app-service
+  namespace: gxfs-idsa
+spec:
+  selector:
+    app: omejdn-server-app
+  ports:
+    - protocol: TCP
+      port: 4567
+      targetPort: 4567
+
+---
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: daps-ui-app-service
+  namespace: gxfs-idsa
+spec:
+  selector:
+    app: omejdn-ui-app
   ports:
     - protocol: TCP
       port: 80

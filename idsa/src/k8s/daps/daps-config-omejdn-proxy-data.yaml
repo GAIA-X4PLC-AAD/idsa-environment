@@ -1,13 +1,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: omejdn-config
+  name: omejdn-proxy-data-config
   namespace: gxfs-idsa
 data:
-  OMEJDN_DOMAIN: "omejdn"
-  OMEJDN_PATH: "/auth"
-  UI_PATH: ""
-  nginx.conf: |
+  default.conf: |
     server {
       listen              80 default_server;
       listen              [::]:80 default_server ;
@@ -19,14 +16,14 @@ data:
       # Proxy to Omejdn
       location  /auth {
         rewrite /auth/(.*) /$1  break;
-        proxy_pass         http://omejdn-server:4567;
+        proxy_pass         http://daps-server-app-service:4567;
         proxy_redirect     off;
       }
 
       # Proxy to the Admin UI
       location  / {
         rewrite /(.*) /$1  break;
-        proxy_pass         http://omejdn-ui;
+        proxy_pass         http://daps-ui-app-service;
         proxy_redirect     off;
       }
 

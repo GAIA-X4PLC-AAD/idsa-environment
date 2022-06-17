@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: omejdn-server-config
+  name: omejdn-server-data-config
   namespace: gxfs-idsa
 data:
   clients.yml: |

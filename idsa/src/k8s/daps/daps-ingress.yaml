@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: daps-ingress
+  namespace: gxfs-idsa
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - path: /idsa-daps(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: daps-proxy-service
+                port:
+                  number: 80
