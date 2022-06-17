@@ -11,7 +11,7 @@ data:
     cp $initDir/config/* /opt/config
     
     mkdir /opt/keys/omejdn
-    cp $initDir/keys/om* /opt/keys/omjedn/
+    cp $initDir/keys/om* /opt/keys/omejdn/
     
     mkdir /opt/keys/clients
     cp $initDir/keys/client1.cert /opt/keys/clients/NjY6MDc6RUQ6RTU6ODA6RTQ6Mjk6NkQ6MUU6REQ6Rjc6NDM6Q0E6MEU6RUI6Mzg6MzI6Qzg6M0E6NDM6a2V5aWQ6MDc6RkM6OTU6MTc6QzQ6OTU6Qjk6RTQ6QUQ6MDk6NUY6MDc6MUU6RDI6MjA6NzU6MkQ6ODk6NjY6ODU=.cert
