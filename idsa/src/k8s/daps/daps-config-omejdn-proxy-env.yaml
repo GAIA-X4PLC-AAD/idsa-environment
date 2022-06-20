@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: omejdn-proxy-env-config
-  namespace: gxfs-idsa
-data:
-  OMEJDN_DOMAIN: "omejdn"
-  OMEJDN_PATH: "/auth"
-  UI_PATH: ""

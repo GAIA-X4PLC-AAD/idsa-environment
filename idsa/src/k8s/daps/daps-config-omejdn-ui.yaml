@@ -4,6 +4,6 @@ metadata:
   name: omejdn-ui-config
   namespace: gxfs-idsa
 data:
-  OIDC_ISSUER: "http://omejdn/auth"
-  API_URL: "http://omejdn/auth/api/v1"
+  OIDC_ISSUER: "https://www.gxfs.gx4fm.org/idsa-daps/"
+  API_URL: "https://www.gxfs.gx4fm.org/idsa-daps/api/v1"
   CLIENT_ID: "adminUI"

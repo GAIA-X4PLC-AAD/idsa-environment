@@ -1,27 +1,29 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: omejdn-server-init-config
+  name: omejdn-server-startup-config
   namespace: gxfs-idsa
 data:
-  init.sh: |
+  startup.sh: |
     #!/bin/sh
-    echo "do server init and copy config and key files ..."
-    initDir=/tmp/init
+    echo "initializing server: copy config and key files to config dir ..."
+    initDir=/opt/init
     cp $initDir/config/* /opt/config
-    
-    mkdir /opt/keys/omejdn
+
+    mkdir -p /opt/keys/omejdn
     cp $initDir/keys/om* /opt/keys/omejdn/
-    
-    mkdir /opt/keys/clients
+
+    mkdir -p /opt/keys/clients
     cp $initDir/keys/client1.cert /opt/keys/clients/NjY6MDc6RUQ6RTU6ODA6RTQ6Mjk6NkQ6MUU6REQ6Rjc6NDM6Q0E6MEU6RUI6Mzg6MzI6Qzg6M0E6NDM6a2V5aWQ6MDc6RkM6OTU6MTc6QzQ6OTU6Qjk6RTQ6QUQ6MDk6NUY6MDc6MUU6RDI6MjA6NzU6MkQ6ODk6NjY6ODU=.cert
     cp $initDir/keys/client2.cert /opt/keys/clients/NEI6NEE6MEU6ODE6OTk6NkE6MTk6Qjk6M0E6MDQ6Mzc6QjY6N0M6ODY6ODM6MTc6MTk6NUE6NkU6Njg6a2V5aWQ6MDc6RkM6OTU6MTc6QzQ6OTU6Qjk6RTQ6QUQ6MDk6NUY6MDc6MUU6RDI6MjA6NzU6MkQ6ODk6NjY6ODU=.cert
     cp $initDir/keys/client3.cert /opt/keys/clients/Qjc6NkQ6REQ6QjM6RkQ6NkU6NDE6NTI6QTg6ODk6OTU6QjA6MEQ6OEU6NEM6QkE6MEE6MUY6NzI6RkQ6a2V5aWQ6MDc6RkM6OTU6MTc6QzQ6OTU6Qjk6RTQ6QUQ6MDk6NUY6MDc6MUU6RDI6MjA6NzU6MkQ6ODk6NjY6ODU=.cert
-    
-    ls -l /opt/config
-    
-    ls -l /opt/keys/
-    ls -l /opt/keys/omejdn
-    ls -l /opt/keys/clients
-    
+
+    ls -ld /opt/config/*
+    ls -ld /opt/keys/omejdn/*
+    ls -ld /opt/keys/clients/*
+
     echo "server init done"
+    
+    echo "starting server ..."
+    cd /opt/
+    ruby omejdn.rb

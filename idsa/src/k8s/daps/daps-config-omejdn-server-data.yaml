@@ -93,8 +93,8 @@ data:
           editable_attributes: []
     user_backend_default: yaml
     environment: development
-    issuer: http://omejdn/auth
-    front_url: http://omejdn/auth
+    issuer: $OMEJDN_ISSUER
+    front_url: $OMEJDN_FRONT_URL
     bind_to: 0.0.0.0:4567
     openid: true
     default_audience: idsc:IDS_CONNECTORS_ALL

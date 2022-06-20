@@ -4,10 +4,10 @@ metadata:
   name: omejdn-server-env-config
   namespace: gxfs-idsa
 data:
-  OMEJDN_ISSUER: http://omejdn/auth
-  OMEJDN_FRONT_URL: http://omejdn/auth
-  OMEJDN_ENVIRONMENT: development
-  OMEJDN_ACCEPT_AUDIENCE: idsc:IDS_CONNECTORS_ALL
-  OMEJDN_DEFAULT_AUDIENCE: idsc:IDS_CONNECTORS_ALL
+  OMEJDN_ISSUER: https://www.gxfs.gx4fm.org/idsa-daps/
+  OMEJDN_FRONT_URL: https://www.gxfs.gx4fm.org/idsa-daps/
+  OMEJDN_ENVIRONMENT: "development"
+  OMEJDN_ACCEPT_AUDIENCE: "idsc:IDS_CONNECTORS_ALL"
+  OMEJDN_DEFAULT_AUDIENCE: "idsc:IDS_CONNECTORS_ALL"
   OMEJDN_OPENID: "true"
-  OMEJDN_ADMIN: "admin:password"
+  OMEJDN_ADMIN: "admin:Hk-887-%abdfd?adldAqprd"

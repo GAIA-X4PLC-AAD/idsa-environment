@@ -26,9 +26,6 @@ spec:
       containers:
         - name: omejdn-proxy
           image: nginx:1.21.6
-          envFrom:
-            - configMapRef:
-                name: omejdn-proxy-env-config
           ports:
             - containerPort: 80
           volumeMounts:
@@ -65,24 +62,10 @@ spec:
           operator: "Equal"
           value: "spot"
           effect: "NoSchedule"
-      initContainers:
-        - name: omejdn-server-init
-          image: busybox:1.34.1
-          command: ['sh', '-c', '/tmp/init/init.sh']
-          volumeMounts:
-            - mountPath: /opt/config
-              name: config-dir
-            - mountPath: /opt/keys
-              name: keys-dir
-            - mountPath: /tmp/init
-              name: config-init-file
-            - mountPath: /tmp/init/config
-              name: config-files
-            - mountPath: /tmp/init/keys
-              name: config-key-files
       containers:
         - name: omejdn-server
           image: ghcr.io/fraunhofer-aisec/omejdn-server:1.6.0
+          command: ['sh', '-c', '/opt/init/startup.sh']
           ports:
             - containerPort: 4567
           envFrom:
@@ -93,14 +76,20 @@ spec:
               name: config-dir
             - mountPath: /opt/keys/
               name: keys-dir
+            - mountPath: /opt/init/config
+              name: config-files
+            - mountPath: /opt/init/keys
+              name: config-key-files
+            - mountPath: /opt/init
+              name: config-startup-file
       volumes:
         - name: config-dir
           emptyDir: {}
         - name: keys-dir
           emptyDir: {}
-        - name: config-init-file
+        - name: config-startup-file
           configMap:
-            name: omejdn-server-init-config
+            name: omejdn-server-startup-config
             defaultMode: 0777
         - name: config-files
           configMap:

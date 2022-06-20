@@ -37,4 +37,5 @@ data:
         # Webfinger
         rewrite /\.well-known/webfinger                         /auth/.well-known/webfinger                  last;
       }
+    
     }
