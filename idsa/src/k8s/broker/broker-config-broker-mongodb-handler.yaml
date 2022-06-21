@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: broker-mongodb-handler-config
+  namespace: gxfs-idsa
+data:
+  MONGODB_ENDPOINT: "mongodb://mongodb:27017/users"
+  JWT_SECRET: "bla"
+  ADMIN_PASSWORD: "blup"
+  BROKER_URL: "http://broker-core:8080"

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: broker-elasticsearch-config
+  namespace: gxfs-idsa
+data:
+  http.port: "9200"
+  http.cors.enabled: "true"
+  http.cors.allow-origin: "http://localhost:3000"
+  http.cors.allow-headers: "*"
+  http.cors.allow-credentials: "true"
+  discovery.type: "single-node"

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: broker-frontend-config
+  namespace: gxfs-idsa
+data:
+  REACT_APP_BROKER_URL: "https://broker.test.mobilitydataspace.io"

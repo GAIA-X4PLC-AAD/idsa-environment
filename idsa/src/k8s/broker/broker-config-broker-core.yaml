@@ -5,9 +5,11 @@ metadata:
   namespace: gxfs-idsa
 data:
   SPARQL_ENDPOINT: "http://broker-fuseki-service:3030/connectorData"
+  SPARQL_URL: "http://broker-fuseki:3030/connectorData"
   ELASTICSEARCH_HOSTNAME: "broker-elasticsearch"
-  SHACL_VALIDATION: "false"
+  SHACL_VALIDATION: "true"
   DAPS_VALIDATE_INCOMING: "false"
-  COMPONENT_URI: "https://localhost/"
-  COMPONENT_CATALOGURI: "https://localhost/connectors/"
+  COMPONENT_URI: "https://broker.test.mobilitydataspace.io"
+  COMPONENT_CATALOGURI: "https://broker.test.mobilitydataspace.io/connectors/"
   DAPS_URL: "http://omejdn/auth/token"
+  SSL_JAVAKEYSTORE: "/etc/cert/ids.broker.test.mobilitydataspace.io.p12"

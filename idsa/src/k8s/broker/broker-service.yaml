@@ -38,3 +38,45 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: broker-elasticsearch-service
+  namespace: gxfs-idsa
+spec:
+  selector:
+    app: broker-elasticsearch-app
+  ports:
+    - protocol: TCP
+      port: 9200
+      targetPort: 9200
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: broker-mongodb-service
+  namespace: gxfs-idsa
+spec:
+  selector:
+    app: broker-mongodb-app
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: broker-mongodb-handler-service
+  namespace: gxfs-idsa
+spec:
+  selector:
+    app: broker-mongodb-app
+  ports:
+    - protocol: TCP
+      port: 4000
+      targetPort: 4000

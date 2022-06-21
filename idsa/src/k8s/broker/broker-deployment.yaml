@@ -24,7 +24,7 @@ spec:
           effect: "NoSchedule"
       containers:
         - name: broker-core
-          image: idstestbed/broker-core:4.2.8
+          image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker/core:5.0.0-RELEASECANDIDATE
           envFrom:
             - configMapRef:
                 name: broker-core-config
@@ -59,19 +59,13 @@ spec:
           effect: "NoSchedule"
       containers:
         - name: broker-fuseki
-          image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/fuseki:latest
+          image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker/fuseki:5.0.0-SNAPSHOT
           ports:
             - containerPort: 3030
           volumeMounts:
-            - name: broker-fuseki
-              mountPath: /fuseki/configuration/connectorData.ttl
-              subPath: connectorData.ttl
             - name: broker-fuseki-persistent-storage
               mountPath: /fuseki
       volumes:
-        - name: broker-fuseki
-          configMap:
-            name: broker-fuseki-config
         - name: broker-fuseki-persistent-storage
           persistentVolumeClaim:
             claimName: broker-fuseki-pvc
@@ -104,7 +98,123 @@ spec:
           effect: "NoSchedule"
       containers:
         - name: broker-frontend
-          image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker/frontend:5.0.0
+          image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker/frontend-mobids:5.0.0-RELEASECANDIDATE
+          envFrom:
+            - configMapRef:
+                name: broker-frontend-config
           ports:
             - containerPort: 80
+      restartPolicy: Always
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: idsa-broker-elasticsearch
+  labels:
+    app: broker-elasticsearch-app
+  namespace: gxfs-idsa
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: broker-elasticsearch-app
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: broker-elasticsearch-app
+    spec:
+      tolerations:
+        - key: "kubernetes.azure.com/scalesetpriority"
+          operator: "Equal"
+          value: "spot"
+          effect: "NoSchedule"
+      containers:
+        - name: broker-elasticsearch
+          image: elasticsearch:7.16.2
+          envFrom:
+            - configMapRef:
+                name: broker-elasticsearch-config
+          volumeMounts:
+            - name: broker-elasticsearch-persistent-storage
+              mountPath: /usr/share/elasticsearch/data
+          ports:
+            - containerPort: 9200
+      restartPolicy: Always
+      volumes:
+        - name: broker-elasticsearch-persistent-storage
+          persistentVolumeClaim:
+            claimName: broker-elasticsearch-pvc
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: idsa-broker-mongodb
+  labels:
+    app: broker-mongodb-app
+  namespace: gxfs-idsa
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: broker-mongodb-app
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: broker-mongodb-app
+    spec:
+      tolerations:
+        - key: "kubernetes.azure.com/scalesetpriority"
+          operator: "Equal"
+          value: "spot"
+          effect: "NoSchedule"
+      containers:
+        - name: broker-mongodb
+          image: mongo:4.4.4
+          volumeMounts:
+            - name: broker-mongodb-persistent-storage
+              mountPath: /data/db
+          ports:
+            - containerPort: 27017
+      restartPolicy: Always
+      volumes:
+        - name: broker-mongodb-persistent-storage
+          persistentVolumeClaim:
+            claimName: broker-mongodb-pvc
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: idsa-broker-mongodb-handler
+  labels:
+    app: broker-mongodb-handler-app
+  namespace: gxfs-idsa
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: broker-mongodb-handler-app
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: broker-mongodb-handler-app
+    spec:
+      tolerations:
+        - key: "kubernetes.azure.com/scalesetpriority"
+          operator: "Equal"
+          value: "spot"
+          effect: "NoSchedule"
+      containers:
+        - name: broker-mongodb-handler
+          image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker/mongodb-handler:4.2.7
+          ports:
+            - containerPort: 4000
       restartPolicy: Always

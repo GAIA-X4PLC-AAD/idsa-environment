@@ -10,3 +10,31 @@ spec:
   resources:
     requests:
       storage: 1Gi
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: broker-elasticsearch-pvc
+  namespace: gxfs-idsa
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: file-retain-storage
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: broker-mongodb-pvc
+  namespace: gxfs-idsa
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: file-retain-storage
+  resources:
+    requests:
+      storage: 1Gi

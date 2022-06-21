@@ -25,3 +25,24 @@ spec:
                 name: broker-frontend-service
                 port:
                   number: 80
+          - path: /idsa-broker-es(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: broker-elasticsearch-service
+                port:
+                  number: 9200
+          - path: /idsa-broker-db(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: broker-mongodb-service
+                port:
+                  number: 27017
+          - path: /idsa-broker-db-handler(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: broker-mongodb-handler-service
+                port:
+                  number: 4000
