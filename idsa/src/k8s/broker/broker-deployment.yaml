@@ -27,9 +27,16 @@ spec:
           image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker/core:5.0.0-RELEASECANDIDATE
           envFrom:
             - configMapRef:
-                name: broker-core-config
+                name: broker-core-config-env
+          volumeMounts:
+            - name: broker-core-config-data
+              mountPath: /etc/cert/
           ports:
             - containerPort: 8080
+      volumes:
+        - name: broker-core-config-data
+          configMap:
+            name: broker-core-config-data
       restartPolicy: Always
 
 ---
@@ -62,13 +69,6 @@ spec:
           image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker/fuseki:5.0.0-SNAPSHOT
           ports:
             - containerPort: 3030
-          volumeMounts:
-            - name: broker-fuseki-persistent-storage
-              mountPath: /fuseki
-      volumes:
-        - name: broker-fuseki-persistent-storage
-          persistentVolumeClaim:
-            claimName: broker-fuseki-pvc
       restartPolicy: Always
 
 ---
@@ -173,12 +173,22 @@ spec:
           operator: "Equal"
           value: "spot"
           effect: "NoSchedule"
-      containers:
-        - name: broker-mongodb
-          image: mongo:4.4.4
+      securityContext:
+        runAsUser: 0
+      initContainers:
+        - name: broker-mongodb-chmod
+          image: busybox:latest
+          command:
+            - /bin/chown
+            - -R
+            - "999"
+            - /data/db
           volumeMounts:
             - name: broker-mongodb-persistent-storage
               mountPath: /data/db
+      containers:
+        - name: broker-mongodb
+          image: mongo:4.2.8
           ports:
             - containerPort: 27017
       restartPolicy: Always

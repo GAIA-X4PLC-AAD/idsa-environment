@@ -6,7 +6,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: file-retain-storage
+  storageClassName: file-retain-storage-ext4
   resources:
     requests:
       storage: 1Gi
@@ -20,7 +20,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: file-retain-storage
+  storageClassName: file-retain-storage-ext4
   resources:
     requests:
       storage: 1Gi
@@ -34,7 +34,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: file-retain-storage
+  storageClassName: file-retain-storage-xfs
   resources:
     requests:
       storage: 1Gi

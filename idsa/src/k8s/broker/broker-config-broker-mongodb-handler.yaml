@@ -4,7 +4,7 @@ metadata:
   name: broker-mongodb-handler-config
   namespace: gxfs-idsa
 data:
-  MONGODB_ENDPOINT: "mongodb://mongodb:27017/users"
+  MONGODB_ENDPOINT: "mongodb://broker-mongodb-service:27017/users"
   JWT_SECRET: "bla"
   ADMIN_PASSWORD: "blup"
-  BROKER_URL: "http://broker-core:8080"
+  BROKER_URL: "http://broker-core-service:8080"
