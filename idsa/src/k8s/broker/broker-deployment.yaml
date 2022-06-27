@@ -225,6 +225,9 @@ spec:
       containers:
         - name: broker-mongodb-handler
           image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker/mongodb-handler:4.2.7
+          envFrom:
+            - configMapRef:
+                name: broker-mongodb-handler-config
           ports:
             - containerPort: 4000
       restartPolicy: Always
