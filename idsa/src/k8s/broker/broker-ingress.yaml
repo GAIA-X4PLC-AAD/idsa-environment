@@ -9,7 +9,8 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - http:
+    - host: gxfs.gx4fm.org
+      http:
         paths:
           - path: /idsa-broker-api(/|$)(.*)
             pathType: Prefix
