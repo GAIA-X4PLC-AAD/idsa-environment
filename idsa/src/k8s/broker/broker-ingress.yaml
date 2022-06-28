@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: broker-core-ingress
+  name: broker-ingress
   namespace: gxfs-idsa
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
@@ -9,8 +9,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: gxfs.gx4fm.org
-      http:
+    - http:
         paths:
           - path: /idsa-broker-api(/|$)(.*)
             pathType: Prefix
