@@ -98,7 +98,7 @@ spec:
           effect: "NoSchedule"
       containers:
         - name: broker-frontend
-          image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker/frontend-mobids:5.0.0-RELEASECANDIDATE
+          image: gx4fmcontainerregistry.azurecr.io/idsa-broker-frontend:5.0-SNAPSHOT
           envFrom:
             - configMapRef:
                 name: broker-frontend-config
