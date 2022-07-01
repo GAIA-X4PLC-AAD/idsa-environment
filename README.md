@@ -14,7 +14,9 @@ For now, if you want to deploy the broker-frontend component, you can use this g
 
 `registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker/frontend-mobids:5.0.0-RELEASECANDIDATE`
 
-... and fix the errors by yourself (that Docker image is not built for a k8s infrastructure).
+... and fix the errors by yourself (that Docker image is not built to be used in a k8s cluster).
+
+Furthermore, if you are using AWS, you maybe need to change some things in order to get the deployment scripts working, e.g. the storage-class files.
 
 ## How to deploy the k8s scripts
 Firstly, you need to connect your local machine to your cloud infrastructure via ssh like this:
@@ -27,7 +29,8 @@ Then, you may use the ps1 scripts located in `idsa/src/k8s`. In this case you ne
 2. `apply_azure_storage-classes.ps1`
 3. `apply_broker.ps1`, `apply_daps.ps1`
 
-If you are using AWS, you maybe need to change some things in order to get the deployment scripts working, e.g. the storage-class files.
-
+## How to delete the deployed containers
 In order to delete the broker and daps k8s deployments, simply run the `delete_namespace.ps1` script. It will take a while until everything is deleted, though.
-We recommend to use a k8s IDE like Lens.
+
+## Tips
+We recommend to use a k8s-based IDE like Lens. Managing and debugging k8s units is a lot easier using one.
