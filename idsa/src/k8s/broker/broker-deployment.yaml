@@ -100,7 +100,7 @@ spec:
         - name: broker-frontend
           image: gx4fmcontainerregistry.azurecr.io/idsa-broker-frontend:5.0-SNAPSHOT
           command: ["/bin/sh", "-c"]
-          args: ["find . -type f -print0 | xargs -0 dos2unix && /usr/share/nginx/html/env.sh && nginx -g \"daemon off;\""]
+          args: ["find . -type f -print0 | xargs -0 dos2unix && cp -r /usr/share/nginx/html /etc/nginx/html. && /usr/share/nginx/html/env.sh && nginx -g \"daemon off;\""]
           envFrom:
             - configMapRef:
                 name: broker-frontend-config
