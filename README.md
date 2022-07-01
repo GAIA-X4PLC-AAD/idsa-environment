@@ -14,12 +14,12 @@ For now, if you want to deploy the broker-frontend component, you can use this g
 
 `registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker/frontend-mobids:5.0.0-RELEASECANDIDATE`
 
-... and fix the errors by yourself. :)
+... and fix the errors by yourself (that Docker image is not built for a k8s infrastructure).
 
 ## How to deploy the k8s scripts
 Firstly, you need to connect your local machine to your cloud infrastructure via ssh like this:
 
-`ssh -i '<path to ssh rsa file>' -L localhost:<port>:<ip address>:<port> <user>@<ip address>`
+`ssh -i '<path to ssh rsa file>' -L localhost:3500:<cloud infrastructure k8s cluster ip address>:<cloud infrastructure k8s cluster port> <cloud infrastructure user>@<cloud infrastructure ip address>`
 
 Then, you may use the ps1 scripts located in `idsa/src/k8s`. In this case you need to execute them in the following order:
 
