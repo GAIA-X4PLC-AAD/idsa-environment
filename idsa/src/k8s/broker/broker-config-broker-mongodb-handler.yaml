@@ -5,6 +5,6 @@ metadata:
   namespace: gxfs-idsa
 data:
   MONGODB_ENDPOINT: "mongodb://broker-mongodb-service:27017/users"
-  JWT_SECRET: "bla"
-  ADMIN_PASSWORD: "blup"
+  JWT_SECRET: "Hadfd-88dfd-ddd"
+  ADMIN_PASSWORD: "KK-dddd-787ddf"
   BROKER_URL: "http://broker-core-service:8080"

@@ -75,7 +75,7 @@ metadata:
   namespace: gxfs-idsa
 spec:
   selector:
-    app: broker-mongodb-app
+    app: broker-mongodb-handler-app
   ports:
     - protocol: TCP
       port: 4000

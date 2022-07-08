@@ -18,8 +18,9 @@ metadata:
   name: broker-elasticsearch-pvc
   namespace: gxfs-idsa
 spec:
+  # TODO: elasticsearch crashes with ReadWriteMany access mode! fix it
   accessModes:
-    - ReadWriteMany
+     - ReadWriteOnce
   storageClassName: file-retain-storage-ext4
   resources:
     requests:

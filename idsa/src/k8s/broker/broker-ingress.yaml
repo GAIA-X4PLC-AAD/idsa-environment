@@ -18,44 +18,6 @@ spec:
                 name: broker-core-service
                 port:
                   number: 8080
-          - path: /idsa-broker-es(/|$)(.*)
-            pathType: Prefix
-            backend:
-              service:
-                name: broker-elasticsearch-service
-                port:
-                  number: 9200
-          - path: /idsa-broker-db(/|$)(.*)
-            pathType: Prefix
-            backend:
-              service:
-                name: broker-mongodb-service
-                port:
-                  number: 27017
-          - path: /idsa-broker-db-handler(/|$)(.*)
-            pathType: Prefix
-            backend:
-              service:
-                name: broker-mongodb-handler-service
-                port:
-                  number: 4000
-
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: broker-ui-ingress
-  namespace: gxfs-idsa
-  annotations:
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      rewrite ^(/idsa-broker-ui)$ $1/ redirect;
-spec:
-  ingressClassName: nginx
-  rules:
-    - http:
-        paths:
           - path: /idsa-broker-ui(/|$)(.*)
             pathType: Prefix
             backend:

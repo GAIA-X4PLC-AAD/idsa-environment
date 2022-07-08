@@ -4,13 +4,13 @@ metadata:
   name: broker-core-config-env
   namespace: gxfs-idsa
 data:
-  SPARQL_ENDPOINT: "http://broker-fuseki-service:3030/connectorData"
   SPARQL_URL: "http://broker-fuseki-service:3030/connectorData"
   ELASTICSEARCH_HOSTNAME: "broker-elasticsearch-service"
-  SHACL_VALIDATION: "false"
+  SHACL_VALIDATION: "true"
   DAPS_VALIDATE_INCOMING: "false"
-  COMPONENT_URI: "https://broker.test.mobilitydataspace.io"
-  COMPONENT_CATALOGURI: "https://broker.test.mobilitydataspace.io/connectors/"
+  COMPONENT_URI: "https://www.gxfs.gx4fm.org/idsa-broker-api"
+  COMPONENT_CATALOGURI: "https://www.gxfs.gx4fm.org/idsa-broker-api/connectors/"
   DAPS_URL: "http://daps-proxy-service/auth/token"
-  SSL_JAVAKEYSTORE: "/etc/cert/isstbroker-keystore.jks"
+  IDENTITY_JAVAKEYSTORE: "/etc/cert/isstbroker-keystore.jks"
+  JWKS_TRUSTEDHOSTS: "daps-proxy-service"
   JAVA_HOME: "/opt/java/openjdk/"

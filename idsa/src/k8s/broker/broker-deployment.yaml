@@ -22,21 +22,38 @@ spec:
           operator: "Equal"
           value: "spot"
           effect: "NoSchedule"
+      initContainers:
+        - name: broker-core-init
+          image: yauritux/busybox-curl:latest
+          command: ['sh', '-c', '/init/init.sh']
+          volumeMounts:
+            - name: broker-core-config-init-data
+              mountPath: /init
       containers:
         - name: broker-core
-          image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker/core:5.0.0-RELEASECANDIDATE
+          image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker/core:5.0.1
           envFrom:
             - configMapRef:
                 name: broker-core-config-env
           volumeMounts:
             - name: broker-core-config-data
-              mountPath: /etc/cert/
+              mountPath: /etc/cert
           ports:
             - containerPort: 8080
       volumes:
+        - name: broker-core-config-init-data
+          configMap:
+            name: broker-core-config-data
+            items:
+              - key: init.sh
+                path: init.sh
+                mode: 0777
         - name: broker-core-config-data
           configMap:
             name: broker-core-config-data
+            items:
+              - key: isstbroker-keystore.jks
+                path: isstbroker-keystore.jks
       restartPolicy: Always
 
 ---
@@ -66,46 +83,9 @@ spec:
           effect: "NoSchedule"
       containers:
         - name: broker-fuseki
-          image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker/fuseki:5.0.0-SNAPSHOT
+          image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker/fuseki:5.0.1
           ports:
             - containerPort: 3030
-      restartPolicy: Always
-
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: idsa-broker-frontend
-  labels:
-    app: broker-frontend-app
-  namespace: gxfs-idsa
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: broker-frontend-app
-  strategy:
-    type: Recreate
-  template:
-    metadata:
-      labels:
-        app: broker-frontend-app
-    spec:
-      tolerations:
-        - key: "kubernetes.azure.com/scalesetpriority"
-          operator: "Equal"
-          value: "spot"
-          effect: "NoSchedule"
-      containers:
-        - name: broker-frontend
-          image: gx4fmcontainerregistry.azurecr.io/idsa-broker-frontend:5.0-SNAPSHOT
-          command: ["/bin/sh", "-c"]
-          args: ["find . -type f -print0 | xargs -0 dos2unix && cp -r /usr/share/nginx/html /etc/nginx/html. && /usr/share/nginx/html/env.sh && nginx -g \"daemon off;\""]
-          envFrom:
-            - configMapRef:
-                name: broker-frontend-config
-          ports:
-            - containerPort: 80
       restartPolicy: Always
 
 ---
@@ -135,7 +115,7 @@ spec:
           effect: "NoSchedule"
       containers:
         - name: broker-elasticsearch
-          image: elasticsearch:7.16.2
+          image: elasticsearch:7.9.3
           envFrom:
             - configMapRef:
                 name: broker-elasticsearch-config
@@ -226,10 +206,45 @@ spec:
           effect: "NoSchedule"
       containers:
         - name: broker-mongodb-handler
-          image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker/mongodb-handler:4.2.7
+          image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker/mongodb-handler:5.0.1
           envFrom:
             - configMapRef:
                 name: broker-mongodb-handler-config
           ports:
             - containerPort: 4000
+      restartPolicy: Always
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: idsa-broker-frontend
+  labels:
+    app: broker-frontend-app
+  namespace: gxfs-idsa
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: broker-frontend-app
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: broker-frontend-app
+    spec:
+      tolerations:
+        - key: "kubernetes.azure.com/scalesetpriority"
+          operator: "Equal"
+          value: "spot"
+          effect: "NoSchedule"
+      containers:
+        - name: broker-frontend
+          image: gx4fmcontainerregistry.azurecr.io/gx4fm/gxfs/idsa-broker-ui:5.0.1-msg-patch
+          envFrom:
+            - configMapRef:
+                name: broker-frontend-config
+          ports:
+            - containerPort: 80
       restartPolicy: Always

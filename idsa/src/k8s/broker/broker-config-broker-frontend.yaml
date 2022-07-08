@@ -4,4 +4,9 @@ metadata:
   name: broker-frontend-config
   namespace: gxfs-idsa
 data:
-  REACT_APP_BROKER_URL: "https://broker.test.mobilitydataspace.io"
+  REACT_APP_BROKER_URL: "https://www.gxfs.gx4fm.org/idsa-broker-ui"
+  REACT_APP_USE_GEO_NAMES: "true"
+  REACT_APP_USE_SPARQL: "true"
+  BASE_URL: "idsa-broker-ui"
+  MONGO_DB_HANDLER_URL: "http://broker-mongodb-handler-service:4000"
+  ELASTICSEARCH_URL: "http://broker-elasticsearch-service:9200"
