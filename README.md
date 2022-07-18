@@ -7,16 +7,7 @@ In order to deploy the k8s scripts, you will need the following:
 - A k8s cluster where you are able to deploy containers
 
 ## Important information
-The broker-frontend deployment currently uses a privately hosted docker image.
-Therefore, you won't be able to deploy this component right now.
-We are working on a globally accessible Docker image solution.
-For now, if you want to deploy the broker-frontend component, you can use this globally accessible Docker image our Docker image is based on:
-
-`registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker/frontend-mobids:5.0.0-RELEASECANDIDATE`
-
-... and fix the errors by yourself (that Docker image is not built to be used in a k8s cluster).
-
-Furthermore, if you are using AWS, you maybe need to change some things in order to get the deployment scripts working, e.g. the storage-class files.
+If you are using AWS, you maybe need to change some things in order to get the deployment scripts working, e.g. the storage-class files.
 
 ## How to deploy the k8s scripts
 Firstly, you need to connect your local machine to your cloud infrastructure via ssh like this:
