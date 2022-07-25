@@ -11,9 +11,11 @@ If you are using AWS or a local environment, you maybe need to change some thing
 ## How to deploy the k8s scripts
 
 ### Connect to the cloud infrastructure
-If you are working with a cloud infrastructure, you need to connect your local machine to your cloud infrastructure via ssh like this:
+If you are working with a cloud infrastructure, you first need to connect your local machine to your cloud infrastructure via ssh like this:
 
 `ssh -i '<path to ssh rsa file>' -L localhost:3500:<cloud infrastructure k8s cluster ip address>:<cloud infrastructure k8s cluster port> <cloud infrastructure user>@<cloud infrastructure ip address>`
+
+Follow the next steps after you established a connection to your cloud cluster.
 
 ### Execute the PS1 scripts
 You may use the ps1 scripts located in `idsa/src/k8s`. In this case you need to execute them in the following order:
