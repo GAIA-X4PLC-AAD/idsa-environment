@@ -15,7 +15,7 @@ If you are working with a cloud infrastructure, you first need to connect your l
 
 `ssh -i '<path to ssh rsa file>' -L localhost:3500:<cloud infrastructure k8s cluster ip address>:<cloud infrastructure k8s cluster port> <cloud infrastructure user>@<cloud infrastructure ip address>`
 
-Follow the next steps after you established a connection to your cloud cluster.
+Follow the next steps after you have established a connection to your cloud cluster.
 
 ### Execute the PS1 scripts
 You may use the ps1 scripts located in `idsa/src/k8s`. In this case you need to execute them in the following order:
