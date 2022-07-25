@@ -19,7 +19,7 @@ If you are working with a cloud infrastructure, you need to connect your local m
 You may use the ps1 scripts located in `idsa/src/k8s`. In this case you need to execute them in the following order:
 
 1. `create_namespace.ps1`: With this, you will create a namespace in your cluster for an easier management of the deployed components
-3. `apply_azure_storage-classes.ps1` or `apply_local_storage-classes.ps1`: These will create the needed storage classes for the usage in an Azure or local cluster
+3. `apply_azure_storage-classes.ps1` or `apply_minikube_storage-classes.ps1`: These will create the needed storage classes for the usage in an Azure or local minikube cluster
 5. `apply_broker.ps1` and `apply_daps.ps1`: These will deploy the Broker and DAPS components in the namespace
 
 ## How to delete the deployed containers
