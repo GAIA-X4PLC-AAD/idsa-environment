@@ -3,8 +3,8 @@
 ## Prerequisites
 In order to deploy the k8s scripts, you will need the following:
 
-- A k8s cluster where you are able to deploy containers (minikube, Managed Azure Kubernetes Service (AKS), ...)
-- Docker Desktop
+- A k8s cluster where you are able to deploy containers ([minikube](https://minikube.sigs.k8s.io/docs/start/), [Managed Azure Kubernetes Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/learn/quick-kubernetes-deploy-cli), ...)
+- [Docker Desktop](https://www.docker.com/blog/getting-started-with-docker-desktop/)
 
 ## Important information
 If you are using AWS or a local environment, you maybe need to change some things in order to get the deployment scripts working, e.g. the storage-class files. The PS1 scripts and current settings are optimized for the usage on an Azure infrastructure (AKS).
