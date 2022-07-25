@@ -20,7 +20,7 @@ The following are the IDSA components which are deployed in this test environmen
   * omejdn-ui
 
 ## Kubernetes scripts deployment
-Please refer to the following [README file](https://github.com/GAIA-X4PLC-AAD/idsa-environment/tree/main/idsa/src/k8s) in order to get more information on this top
+Please refer to the following [README file](https://github.com/GAIA-X4PLC-AAD/idsa-environment/tree/main/idsa/src/k8s) in order to get more information on this topic.
 
 ## IDSA Dataspace Connector Usage Example
 Please refer to the following [README file](https://github.com/GAIA-X4PLC-AAD/idsa-environment/tree/main/idsa/src/docker-compose/connector-example) in order to get more information on this topic.
