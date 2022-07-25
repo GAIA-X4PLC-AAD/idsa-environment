@@ -9,10 +9,13 @@ In order to deploy the k8s scripts, you will need the following:
 If you are using AWS or a local environment, you maybe need to change some things in order to get the deployment scripts working, e.g. the storage-class files. The PS1 scripts and current settings are optimized for the usage on an Azure infrastructure.
 
 ## How to deploy the k8s scripts
-Firstly, you need to connect your local machine to your cloud infrastructure via ssh like this:
+
+### Connect to cloud infrastructure
+If you are working with a cloud infrastructure, you need to connect your local machine to your cloud infrastructure via ssh like this:
 
 `ssh -i '<path to ssh rsa file>' -L localhost:3500:<cloud infrastructure k8s cluster ip address>:<cloud infrastructure k8s cluster port> <cloud infrastructure user>@<cloud infrastructure ip address>`
 
+### Execute the PS1 scripts
 Then, you may use the ps1 scripts located in `idsa/src/k8s`. In this case you need to execute them in the following order:
 
 1. `create_namespace.ps1`
