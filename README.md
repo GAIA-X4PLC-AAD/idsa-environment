@@ -1,4 +1,4 @@
-# IDSA test environment
+# IDSA Test Environment
 
 ## Introduction
 This repository contains Kubernetes scripts for a test deployment of the IDSA components for the Metadata Broker and DAPS functionality.
@@ -19,7 +19,7 @@ The following are the IDSA components which are deployed in this test environmen
   * omejdn-server
   * omejdn-ui
 
-## Kubernetes scripts deployment
+## Kubernetes Scripts Deployment
 Please refer to the following [README file](https://github.com/GAIA-X4PLC-AAD/idsa-environment/tree/main/idsa/src/k8s) in order to get more information on this topic.
 
 ## IDSA Dataspace Connector Usage Example
