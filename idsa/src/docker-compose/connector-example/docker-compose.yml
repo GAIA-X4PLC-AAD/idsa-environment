@@ -1,0 +1,55 @@
+services:
+
+  connectora:
+    image: ghcr.io/international-data-spaces-association/dataspace-connector:7.1.0
+    container_name: connector-1
+    hostname: connectora
+    ports:
+      - 9080:8080
+    networks:
+      - local
+    volumes:
+      - ./DataspaceConnectorA/conf/config.json:/config/config.json
+      - ./DataspaceConnectorA/conf/testbed1.p12:/conf/testbed1.p12
+      - ./DataspaceConnectorA/conf/connectorA.p12:/config/connectorA.p12
+      - ./DataspaceConnectorA/conf/truststore.p12:/config/truststore.p12
+    environment:
+      - HTTP_TIMEOUT_CONNECT=60000
+      - HTTP_TIMEOUT_READ=60000
+      - HTTP_TIMEOUT_WRITE=60000
+      - HTTP_TIMEOUT_CALL=60000
+      - CONFIGURATION_PATH=/config/config.json
+      - SERVER_SSL_KEY-STORE=file:///config/connectorA.p12
+      - DAPS_URL=https://www.gxfs.gx4fm.org/idsa-daps
+      - DAPS_TOKEN_URL=https://www.gxfs.gx4fm.org/idsa-daps/auth/token
+      - DAPS_KEY_URL=https://www.gxfs.gx4fm.org/idsa-daps/auth/jwks.json
+
+
+  connectorb:
+    image: ghcr.io/international-data-spaces-association/dataspace-connector:7.1.0
+    container_name: connector-2
+    hostname: connectorb
+    ports:
+      - 9081:8081
+    networks:
+      - local
+    volumes:
+      - ./DataspaceConnectorB/conf/config.json:/config/config.json
+      - ./DataspaceConnectorB/conf/testbed2.p12:/conf/testbed2.p12
+      - ./DataspaceConnectorB/conf/connectorB.p12:/config/connectorB.p12
+      - ./DataspaceConnectorB/conf/truststore.p12:/config/truststore.p12
+    environment:
+      - HTTP_TIMEOUT_CONNECT=60000
+      - HTTP_TIMEOUT_READ=60000
+      - HTTP_TIMEOUT_WRITE=60000
+      - HTTP_TIMEOUT_CALL=60000
+      - CONFIGURATION_PATH=/config/config.json
+      - SERVER_PORT=8081
+      - SERVER_SSL_KEY-STORE=file:///config/connectorB.p12
+      - DAPS_URL=https://www.gxfs.gx4fm.org/idsa-daps
+      - DAPS_TOKEN_URL=https://www.gxfs.gx4fm.org/idsa-daps/auth/token
+      - DAPS_KEY_URL=https://www.gxfs.gx4fm.org/idsa-daps/auth/jwks.json
+
+networks:
+  local:
+    driver: bridge
