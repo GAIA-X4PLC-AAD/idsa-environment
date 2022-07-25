@@ -52,8 +52,5 @@ In order to delete the broker and daps k8s deployments, simply run the `delete_n
 ### Tips
 We recommend to use a k8s-based IDE like Lens. Managing and debugging k8s units is a lot easier using one.
 
-## Using the deployed IDSA components
-
-### Accessing the deployed software
-
-### Registering a connector
+## IDSA Dataspace Connector Usage Example
+Please refer to the following [README file](https://github.com/GAIA-X4PLC-AAD/idsa-environment/tree/main/idsa/src/docker-compose/connector-example) in order to get more information on this topic.
