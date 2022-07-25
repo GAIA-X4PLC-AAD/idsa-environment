@@ -28,7 +28,7 @@ Connector A will be accessible via port 9080 and Connector B via port 9081.
 
 ### Example Usage
 
-The following examples demonstrates the usage and shows some base commands:
+The following examples demonstrate the usage and show some base commands:
 
 Read Self Description of the Connectors:
 ```sh
