@@ -1,4 +1,4 @@
-## Kubernetes scripts deployment
+## Kubernetes Scripts Deployment
 
 ### Prerequisites
 In order to deploy the k8s scripts, you will need the following:
