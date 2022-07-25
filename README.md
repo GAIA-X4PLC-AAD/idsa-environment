@@ -11,7 +11,7 @@ If you are using AWS or a local environment, you maybe need to change some thing
 ## How to deploy the k8s scripts
 
 ### Connect to the cloud infrastructure
-If you are working with a cloud infrastructure, you first need to connect your local machine to your cloud infrastructure via ssh like this:
+This step is only needed if you want to deploy the components into a cluster inside a cloud infrastructure like Azure or AWS. If you are working with a cloud infrastructure, you first need to connect your local machine to your cloud infrastructure via ssh like this:
 
 `ssh -i '<path to ssh rsa file>' -L localhost:3500:<cloud infrastructure k8s cluster ip address>:<cloud infrastructure k8s cluster port> <cloud infrastructure user>@<cloud infrastructure ip address>`
 
