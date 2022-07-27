@@ -241,7 +241,7 @@ spec:
           effect: "NoSchedule"
       containers:
         - name: broker-frontend
-          image: rosenbeli/idsa-broker-ui:5.0.1-msg-patch
+          image: ghcr.io/gaia-x4plc-aad/idsa-environment/idsa-broker-ui:5.0.1-msg-patch
           envFrom:
             - configMapRef:
                 name: broker-frontend-config
