@@ -41,7 +41,7 @@ There is no external access. If you want to access the software from your web br
 
 This will start the Kubernetes Proxy. If needed, you can choose a different port number. Now, you will be able to navigate through the Kubernetes API to access the deployed services using this scheme:
 
-`http://localhost:8080/api/v1/proxy/namespaces/gxfs-idsa/services/<service name>:<port number>/proxy/`
+`http://localhost:8080/api/v1/namespaces/gxfs-idsa/services/<service name>:<port number>/proxy/`
 
 The available service names and their port numbers are:
 * broker-core-service:8080
