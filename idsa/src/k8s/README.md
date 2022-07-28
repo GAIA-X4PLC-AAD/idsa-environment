@@ -30,9 +30,9 @@ You can access the software from your web browser with this url name schema:
 `https://<host name>/<ingress path>/`
 
 There are the following Ingress paths defined:
-* https://<host name>/idsa-broker-ui/
-* https://<host name>/idsa-broker-api/
-* https://<host name>/idsa-daps/
+* `https://<host name>/idsa-broker-ui/`
+* `https://<host name>/idsa-broker-api/`
+* `https://<host name>/idsa-daps/`
 
 #### Local environment
 There is no external access. If you want to access the software from your web browser, please run this command first:
@@ -44,15 +44,15 @@ This will start the Kubernetes Proxy. If needed, you can choose a different port
 `http://localhost:8080/api/v1/namespaces/gxfs-idsa/services/<service name>:<port number>/proxy/`
 
 The available service names and their port numbers are:
-* broker-core-service:8080
-* broker-elasticsearch-service:9200
-* broker-frontend-service:80
-* broker-fuseki-service:3030
-* broker-mongodb-handler-service:4000
-* broker-mongodb-service:27017
-* daps-proxy-service:80
-* daps-server-app-service:4567
-* daps-ui-app-service:80
+* `broker-core-service:8080`
+* `broker-elasticsearch-service:9200`
+* `broker-frontend-service:80`
+* `broker-fuseki-service:3030`
+* `broker-mongodb-handler-service:4000`
+* `broker-mongodb-service:27017`
+* `daps-proxy-service:80`
+* `daps-server-app-service:4567`
+* `daps-ui-app-service:80`
 
 ### How to delete the deployed containers
 In order to delete the broker and daps k8s deployments, simply run the `delete_namespace.ps1` script. It will take a while until everything is deleted, though. You will have to wait until everything is removed before recreating the namespace and applying the kubernetes scripts again. If there are only minor changes, you may only have to reapplying the kubernetes scripts instead of deleting the namespace.
