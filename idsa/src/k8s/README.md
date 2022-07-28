@@ -35,7 +35,7 @@ There are the following Ingress paths defined:
 * `https://<host name>/idsa-daps/`
 
 #### Local environment
-There is no external access. If you want to access the software from your web browser, please run this command first:
+There is no direct external access. If you want to access the software from your web browser, please run this command first:
 
 `kubectl proxy --port=8080`
 
