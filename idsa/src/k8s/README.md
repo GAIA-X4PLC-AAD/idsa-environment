@@ -66,5 +66,3 @@ If there are some problems, here are some ideas for troubleshooting:
 * Please check if you are using the correct storage class provider. In this repository you will only find the storage classes for the Azure and minikube provider.
 * The mongodb-handler only works correctly if the mongodb is up and running. Therefore, some restarts of the mongodb-handler Pod may be normal.
 * Check the Pod Logs of the Pods
-
-# CI Test
