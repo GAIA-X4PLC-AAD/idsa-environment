@@ -41,7 +41,7 @@ Read Self Description of Connector A via Connector B
 curl -X POST -k -u "admin:password" "https://localhost:9081/api/ids/description?recipient=https://connectora:8080/api/ids/data"
 ```
 
-Register Connector A at the Broker. After registering, the connector will be visible in the broker: https://www.gxfs.gx4fm.org/idsa-broker-ui
+Register Connector A at the Broker. After registering, the connector will be visible in the broker (https://www.gxfs.gx4fm.org/idsa-broker-ui/) in the "Connectors" section. 
 
 ```sh
 curl -X POST -k -u "admin:password" "https://localhost:9080/api/ids/connector/update?recipient=https://www.gxfs.gx4fm.org/idsa-broker-api/infrastructure"
